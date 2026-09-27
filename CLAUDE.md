@@ -11,6 +11,7 @@ SwiftBiff is a macOS menu bar app that shows the number of unread conversations 
 - No third-party dependencies.
 - No force unwraps outside tests, except for URL literals that are known to be valid.
 - Logging goes through `os.Logger` and never includes subjects, senders or email addresses.
+- User-facing text is written inline in English and goes through `LocalizedStringKey` (SwiftUI literals) or `String(localized:)`. Xcode collects it into `swiftbiff/Localizable.xcstrings`. No string constants files.
 
 ## Commit rules
 
@@ -45,4 +46,10 @@ Out of scope for now: notifications and sounds, several accounts, importing the 
 
 ```sh
 xcodebuild -project swiftbiff.xcodeproj -scheme swiftbiff -destination 'platform=macOS' -allowProvisioningUpdates test
+```
+
+Building in the Xcode IDE updates the string catalog. `xcodebuild` does not, so after changing user-facing text from the terminal, build with `-derivedDataPath build` and sync it:
+
+```sh
+xcrun xcstringstool sync swiftbiff/Localizable.xcstrings --stringsdata $(find build/Build/Intermediates.noindex/swiftbiff.build/Debug -name '*.stringsdata')
 ```

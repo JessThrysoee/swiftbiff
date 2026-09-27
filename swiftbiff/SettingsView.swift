@@ -63,7 +63,7 @@ struct SettingsView: View {
                     Text("Waiting for the browser…")
                     Button("Cancel") { signInTask?.cancel() }
                 } else {
-                    Text(errorMessage ?? "Not signed in")
+                    Text(errorMessage ?? String(localized: "Not signed in"))
                         .foregroundStyle(errorMessage == nil ? Color.secondary : Color.red)
                     Button("Sign In…", action: signIn)
                         .disabled(clientID.isEmpty || clientSecret.isEmpty)
@@ -113,13 +113,13 @@ struct SettingsView: View {
 private func signInErrorMessage(for error: any Error) -> String {
     switch error as? OAuthError {
     case .denied:
-        "Access was not granted."
+        String(localized: "Access was not granted.")
     case .timedOut:
-        "Timed out waiting for the browser."
+        String(localized: "Timed out waiting for the browser.")
     case .invalidGrant, .http(400), .http(401):
-        "Google rejected the sign-in. Check the client ID and secret."
+        String(localized: "Google rejected the sign-in. Check the client ID and secret.")
     case .missingRefreshToken:
-        "Google did not return a refresh token."
+        String(localized: "Google did not return a refresh token.")
     default:
         error.localizedDescription
     }

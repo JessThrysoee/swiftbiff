@@ -33,8 +33,8 @@ func receiveCallback(
             let result = Result { try parseCallback(requestLine, expectedState: state) }
                 .mapError { $0 as? OAuthError ?? .badCallback }
             let message = switch result {
-            case .success: "Signed in to SwiftBiff. You can close this tab."
-            case .failure: "SwiftBiff sign-in failed. You can close this tab."
+            case .success: String(localized: "Signed in to SwiftBiff. You can close this tab.")
+            case .failure: String(localized: "SwiftBiff sign-in failed. You can close this tab.")
             }
             try? await connection.send(Data(httpResponse(status: "200 OK", message: message).utf8), endOfStream: true)
             callbackContinuation.yield(result)

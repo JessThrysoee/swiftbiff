@@ -46,11 +46,11 @@ struct MenuContent: View {
     private var checkNowTitle: String {
         switch (checker.status, checker.lastCheck) {
         case (.failed, _):
-            "Check Now - last check: error"
+            String(localized: "Check Now - last check: error")
         case (.ok, let lastCheck?):
-            "Check Now - last check \(lastCheck.formatted(date: .omitted, time: .shortened))"
+            String(localized: "Check Now - last check \(lastCheck.formatted(date: .omitted, time: .shortened))")
         default:
-            "Check Now"
+            String(localized: "Check Now")
         }
     }
 }
@@ -60,7 +60,7 @@ struct MenuBarLabel: View {
 
     var body: some View {
         Image(nsImage: image)
-            .accessibilityLabel(count.map { "\($0) unread" } ?? "SwiftBiff")
+            .accessibilityLabel(count.map { String(localized: "\($0) unread") } ?? "SwiftBiff")
     }
 
     private var count: Int? {
@@ -74,7 +74,7 @@ struct MenuBarLabel: View {
             Image(systemName: count == nil ? "envelope" : "envelope.fill")
                 .font(.system(size: 15, weight: .medium))
             if let count {
-                Text("\(count)")
+                Text(count, format: .number)
                     .font(.system(size: 13))
             }
         }

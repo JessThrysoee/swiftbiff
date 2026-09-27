@@ -1,0 +1,90 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%lld min" : {
+
+    },
+    "%lld unread" : {
+
+    },
+    "(no subject)" : {
+
+    },
+    "Access was not granted." : {
+
+    },
+    "Account" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Check Now" : {
+
+    },
+    "Check Now - last check %@" : {
+
+    },
+    "Check Now - last check: error" : {
+
+    },
+    "Check every" : {
+
+    },
+    "Client ID" : {
+
+    },
+    "Client Secret" : {
+
+    },
+    "Google did not return a refresh token." : {
+
+    },
+    "Google rejected the sign-in. Check the client ID and secret." : {
+
+    },
+    "No unread mail" : {
+
+    },
+    "Not signed in" : {
+
+    },
+    "Open Inbox" : {
+
+    },
+    "Open at login" : {
+
+    },
+    "Paste from Google Cloud" : {
+
+    },
+    "Quit" : {
+
+    },
+    "Settings…" : {
+
+    },
+    "Sign In…" : {
+
+    },
+    "Sign Out" : {
+
+    },
+    "Signed in to SwiftBiff. You can close this tab." : {
+
+    },
+    "SwiftBiff sign-in failed. You can close this tab." : {
+
+    },
+    "Timed out waiting for the browser." : {
+
+    },
+    "Waiting for the browser…" : {
+
+    },
+    "…and %lld more" : {
+
+    }
+  },
+  "version" : "1.0"
+}
