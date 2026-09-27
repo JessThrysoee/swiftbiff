@@ -22,22 +22,9 @@
 		5B1F00000000000000000003 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		5B1F00000000000000000012 /* Exceptions for "swiftbiff" folder in "swiftbiff" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 5B1F00000000000000000030 /* swiftbiff */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		5B1F00000000000000000010 /* swiftbiff */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				5B1F00000000000000000012 /* Exceptions for "swiftbiff" folder in "swiftbiff" target */,
-			);
 			path = swiftbiff;
 			sourceTree = "<group>";
 		};
@@ -237,7 +224,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = swiftbiff/swiftbiff.entitlements;
-				INFOPLIST_FILE = swiftbiff/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Jess Thrysoee";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dk.thrysoee.swiftbiff;
@@ -249,7 +236,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = swiftbiff/swiftbiff.entitlements;
-				INFOPLIST_FILE = swiftbiff/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Jess Thrysoee";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dk.thrysoee.swiftbiff;
