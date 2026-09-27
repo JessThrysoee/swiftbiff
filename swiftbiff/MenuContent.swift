@@ -14,7 +14,12 @@ struct MenuContent: View {
         }
         .disabled(checker.status == .signedOut)
 
-        if let unreadCount = checker.unreadCount {
+        if checker.status == .signedOut {
+            Divider()
+            SettingsLink {
+                Text("Sign In…")
+            }
+        } else if let unreadCount = checker.unreadCount {
             Divider()
             if checker.threads.isEmpty {
                 Text("No unread mail")
@@ -28,6 +33,10 @@ struct MenuContent: View {
         }
 
         Divider()
+        SettingsLink {
+            Text("Settings…")
+        }
+        .keyboardShortcut(",")
         Button("Quit") {
             NSApp.terminate(nil)
         }

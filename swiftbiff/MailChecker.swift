@@ -30,6 +30,9 @@ final class MailChecker {
         }
     }
 
+    var savedClientID: String { Keychain.string(for: .clientID) ?? "" }
+    var savedClientSecret: String { Keychain.string(for: .clientSecret) ?? "" }
+
     private var accessToken: AccessToken?
     private var polling: Task<Void, Never>?
     private var isChecking = false

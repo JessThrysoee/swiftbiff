@@ -11,5 +11,10 @@ struct SwiftbiffApp: App {
             MenuBarLabel(checker: checker)
         }
         .menuBarExtraStyle(.menu)
+
+        Settings {
+            SettingsView(checker: checker)
+        }
+        .windowResizability(.contentSize)
     }
 }
