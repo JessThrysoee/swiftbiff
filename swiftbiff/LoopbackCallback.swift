@@ -37,6 +37,8 @@ func receiveCallback(
             case .failure: String(localized: "SwiftBiff sign-in failed. You can close this tab.")
             }
             try? await connection.send(Data(httpResponse(status: "200 OK", message: message).utf8), endOfStream: true)
+            // A stale consent tab or another local process must not be able to end the sign-in.
+            if case .failure(.stateMismatch) = result { return }
             callbackContinuation.yield(result)
         }
     }

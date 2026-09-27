@@ -56,6 +56,15 @@ struct OAuthTests {
         #expect(redirectURI.hasPrefix("http://127.0.0.1:"))
     }
 
+    @Test func loopbackListenerIgnoresWrongState() async throws {
+        let (code, _) = try await receiveCallback(state: "xyz", timeout: .seconds(10)) { redirectURI in
+            for query in ["state=evil&code=bad", "state=xyz&code=good"] {
+                _ = try? await URLSession.shared.data(from: URL(string: "\(redirectURI)/?\(query)")!)
+            }
+        }
+        #expect(code == "good")
+    }
+
     @Test func loopbackListenerTimesOut() async {
         await #expect(throws: OAuthError.timedOut) {
             try await receiveCallback(state: "xyz", timeout: .milliseconds(100)) { _ in }
