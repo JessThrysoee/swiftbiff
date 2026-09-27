@@ -78,7 +78,7 @@ struct MenuBarLabel: View {
                     .font(.system(size: 13))
             }
         }
-        .opacity(checker.status == .ok ? 1 : 0.4)
+        .opacity(checker.status == .ok && checker.unreadCount != nil ? 1 : 0.4)
 
         let renderer = ImageRenderer(content: content)
         renderer.scale = NSScreen.main?.backingScaleFactor ?? 2

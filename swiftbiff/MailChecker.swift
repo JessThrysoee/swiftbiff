@@ -94,8 +94,6 @@ final class MailChecker {
             // should not change the icon. Check Now always shows its result.
             if isUserInitiated || failedChecks >= 2 {
                 status = .failed
-                unreadCount = nil
-                threads = []
             }
         }
     }
