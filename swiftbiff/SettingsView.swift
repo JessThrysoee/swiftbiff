@@ -102,6 +102,7 @@ struct SettingsView: View {
                 try await checker.signIn(clientID: clientID, clientSecret: clientSecret)
             } catch {
                 if !Task.isCancelled {
+                    logger.error("Sign-in failed: \(error)")
                     errorMessage = signInErrorMessage(for: error)
                 }
             }
@@ -121,6 +122,6 @@ private func signInErrorMessage(for error: any Error) -> String {
     case .missingRefreshToken:
         String(localized: "Google did not return a refresh token.")
     default:
-        error.localizedDescription
+        String(localized: "Sign-in failed.")
     }
 }
