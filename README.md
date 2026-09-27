@@ -19,7 +19,7 @@ SwiftBiff is a macOS menu bar app for Gmail. It shows how many unread conversati
 
 SwiftBiff asks Google for the `gmail.metadata` scope and nothing else. That scope covers labels, counts and message headers. It does not cover message bodies or attachments, so SwiftBiff cannot read your mail even if it wanted to. It cannot send, delete or change anything either.
 
-SwiftBiff keeps your client ID, client secret and refresh token in the login keychain under `dk.thrysoee.swiftbiff`. The access token only lives in memory. SwiftBiff talks to Google and to nobody else.
+SwiftBiff keeps your client ID, client secret and refresh token in the login keychain under `dk.thrysoee.swiftbiff`. The access token only lives in memory. Your email address and the check interval are stored in the app's preferences. SwiftBiff talks to Google and to nobody else.
 
 Requires macOS 27.
 
