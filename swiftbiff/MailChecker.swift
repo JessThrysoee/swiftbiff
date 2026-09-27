@@ -26,7 +26,7 @@ final class MailChecker {
     var interval: Int {
         didSet {
             UserDefaults.standard.set(interval, forKey: "checkInterval")
-            if status != .signedOut { startPolling() }
+            if status != .signedOut { startPolling(after: .seconds(interval * 60)) }
         }
     }
 
@@ -81,7 +81,7 @@ final class MailChecker {
             failedChecks = 0
             lastCheck = .now
         } catch {
-            guard isSignedIn(with: refreshToken) else { return }
+            guard !Task.isCancelled, isSignedIn(with: refreshToken) else { return }
             if error as? OAuthError == .invalidGrant {
                 logger.notice("Refresh token was rejected, signing out")
                 Keychain.delete(.refreshToken)
@@ -143,9 +143,10 @@ final class MailChecker {
         }
     }
 
-    private func startPolling() {
+    private func startPolling(after delay: Duration = .zero) {
         polling?.cancel()
         polling = Task { [weak self] in
+            try? await Task.sleep(for: delay)
             while !Task.isCancelled {
                 await self?.check()
                 guard let minutes = self?.interval else { return }
