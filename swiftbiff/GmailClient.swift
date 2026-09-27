@@ -25,7 +25,7 @@ struct GmailClient: Sendable {
     }
 
     func unreadCount() async throws -> Int {
-        let label: Label = try await get("labels/INBOX")
+        let label: GmailLabel = try await get("labels/INBOX")
         return label.threadsUnread
     }
 
@@ -82,7 +82,7 @@ struct Profile: Decodable {
     let emailAddress: String
 }
 
-struct Label: Decodable {
+struct GmailLabel: Decodable {
     let threadsUnread: Int
 }
 

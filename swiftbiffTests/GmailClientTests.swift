@@ -8,7 +8,7 @@ struct GmailClientTests {
     }
 
     @Test func decodesInboxLabel() throws {
-        let label: Label = try decode("""
+        let label: GmailLabel = try decode("""
             {
               "id": "INBOX",
               "name": "INBOX",
