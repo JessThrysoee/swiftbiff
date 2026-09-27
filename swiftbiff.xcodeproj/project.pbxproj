@@ -1,0 +1,211 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXFileReference section */
+		5B1F00000000000000000001 /* SwiftBiff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftBiff.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B1F00000000000000000003 /* Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		5B1F00000000000000000012 /* Exceptions for "swiftbiff" folder in "swiftbiff" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 5B1F00000000000000000030 /* swiftbiff */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		5B1F00000000000000000010 /* swiftbiff */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				5B1F00000000000000000012 /* Exceptions for "swiftbiff" folder in "swiftbiff" target */,
+			);
+			path = swiftbiff;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5B1F00000000000000000041 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5B1F00000000000000000020 = {
+			isa = PBXGroup;
+			children = (
+				5B1F00000000000000000022 /* Config */,
+				5B1F00000000000000000010 /* swiftbiff */,
+				5B1F00000000000000000021 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5B1F00000000000000000021 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5B1F00000000000000000001 /* SwiftBiff.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5B1F00000000000000000022 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				5B1F00000000000000000003 /* Base.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5B1F00000000000000000030 /* swiftbiff */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B1F00000000000000000061 /* Build configuration list for PBXNativeTarget "swiftbiff" */;
+			buildPhases = (
+				5B1F00000000000000000040 /* Sources */,
+				5B1F00000000000000000041 /* Frameworks */,
+				5B1F00000000000000000042 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				5B1F00000000000000000010 /* swiftbiff */,
+			);
+			name = swiftbiff;
+			productName = swiftbiff;
+			productReference = 5B1F00000000000000000001 /* SwiftBiff.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5B1F00000000000000000050 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					5B1F00000000000000000030 = {
+						CreatedOnToolsVersion = 27.0;
+					};
+				};
+			};
+			buildConfigurationList = 5B1F00000000000000000060 /* Build configuration list for PBXProject "swiftbiff" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5B1F00000000000000000020;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 5B1F00000000000000000021 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5B1F00000000000000000030 /* swiftbiff */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5B1F00000000000000000042 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5B1F00000000000000000040 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		5B1F00000000000000000070 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B1F00000000000000000003 /* Base.xcconfig */;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		5B1F00000000000000000071 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B1F00000000000000000003 /* Base.xcconfig */;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		5B1F00000000000000000072 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = swiftbiff/swiftbiff.entitlements;
+				INFOPLIST_FILE = swiftbiff/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Jess Thrysoee";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dk.thrysoee.swiftbiff;
+				PRODUCT_NAME = SwiftBiff;
+			};
+			name = Debug;
+		};
+		5B1F00000000000000000073 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = swiftbiff/swiftbiff.entitlements;
+				INFOPLIST_FILE = swiftbiff/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 Jess Thrysoee";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = dk.thrysoee.swiftbiff;
+				PRODUCT_NAME = SwiftBiff;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5B1F00000000000000000060 /* Build configuration list for PBXProject "swiftbiff" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B1F00000000000000000070 /* Debug */,
+				5B1F00000000000000000071 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B1F00000000000000000061 /* Build configuration list for PBXNativeTarget "swiftbiff" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B1F00000000000000000072 /* Debug */,
+				5B1F00000000000000000073 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5B1F00000000000000000050 /* Project object */;
+}
