@@ -57,7 +57,7 @@ struct MenuContent: View {
 
 func menuTitle(for thread: UnreadThread, maxLength: Int = 60) -> String {
     let subject = thread.subject.isEmpty ? String(localized: "(no subject)") : thread.subject
-    let title = "\(thread.sender) - \(subject)"
+    let title = String(localized: "\(thread.sender) - \(subject)", comment: "A menu row: the sender, then the subject")
     guard title.count > maxLength else { return title }
     return title.prefix(maxLength - 1).trimmingCharacters(in: .whitespaces) + "…"
 }
