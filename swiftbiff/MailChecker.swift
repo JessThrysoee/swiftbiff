@@ -112,7 +112,6 @@ final class MailChecker {
         try Keychain.set(tokens.refreshToken, for: .refreshToken)
         accessToken = tokens.accessToken
         sessionExpired = false
-        email = try? await GmailClient(accessToken: tokens.accessToken.value).emailAddress()
         status = .ok
         startPolling()
     }

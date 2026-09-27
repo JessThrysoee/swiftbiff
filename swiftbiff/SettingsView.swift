@@ -56,7 +56,7 @@ struct SettingsView: View {
         LabeledContent("Account") {
             HStack {
                 if checker.status != .signedOut {
-                    Text(checker.email ?? "")
+                    Text(checker.email ?? String(localized: "Signed in"))
                         .textSelection(.enabled)
                     Button("Sign Out") { checker.signOut() }
                 } else if signInTask != nil {
