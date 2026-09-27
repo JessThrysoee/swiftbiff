@@ -1,4 +1,3 @@
-import AppKit
 import CryptoKit
 import Foundation
 import os
@@ -30,17 +29,16 @@ struct OAuthClient: Sendable {
     let clientID: String
     let clientSecret: String
 
-    func authorize() async throws -> Tokens {
+    func authorize(openURL: @MainActor @Sendable (URL) -> Void) async throws -> Tokens {
         let verifier = randomToken()
         let state = randomToken()
         let (code, redirectURI) = try await receiveCallback(state: state, timeout: .seconds(5 * 60)) { redirectURI in
-            let url = consentURL(
+            await openURL(consentURL(
                 clientID: clientID,
                 redirectURI: redirectURI,
                 challenge: codeChallenge(for: verifier),
                 state: state
-            )
-            await MainActor.run { _ = NSWorkspace.shared.open(url) }
+            ))
         }
 
         let response = try await requestToken([

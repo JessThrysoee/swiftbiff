@@ -108,7 +108,7 @@ final class MailChecker {
         try Keychain.set(client.clientID, for: .clientID)
         try Keychain.set(client.clientSecret, for: .clientSecret)
 
-        let tokens = try await client.authorize()
+        let tokens = try await client.authorize { NSWorkspace.shared.open($0) }
         try Keychain.set(tokens.refreshToken, for: .refreshToken)
         accessToken = tokens.accessToken
         sessionExpired = false
