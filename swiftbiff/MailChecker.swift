@@ -207,15 +207,3 @@ final class MailChecker {
         email = nil
     }
 }
-
-func menuTitle(for thread: UnreadThread, maxLength: Int = 60) -> String {
-    let subject = thread.subject.isEmpty ? String(localized: "(no subject)") : thread.subject
-    let title = "\(thread.sender) - \(subject)"
-    guard title.count > maxLength else { return title }
-    return title.prefix(maxLength - 1).trimmingCharacters(in: .whitespaces) + "…"
-}
-
-func moreRow(unreadCount: Int, shown: Int) -> String? {
-    guard unreadCount > shown else { return nil }
-    return String(localized: "…and \(unreadCount - shown) more")
-}

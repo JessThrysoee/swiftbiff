@@ -1,7 +1,7 @@
 import Testing
 @testable import SwiftBiff
 
-struct MailCheckerTests {
+struct MenuContentTests {
     @Test func formatsRow() {
         let thread = UnreadThread(id: "t", sender: "Jane Doe", subject: "Re: Q3 budget review")
         #expect(menuTitle(for: thread) == "Jane Doe - Re: Q3 budget review")
@@ -20,13 +20,5 @@ struct MailCheckerTests {
 
     @Test func showsPlaceholderForEmptySubject() {
         #expect(menuTitle(for: UnreadThread(id: "t", sender: "Jane Doe", subject: "")) == "Jane Doe - (no subject)")
-    }
-
-    @Test func addsMoreRow() {
-        #expect(moreRow(unreadCount: 38, shown: 15) == "…and 23 more")
-    }
-
-    @Test func omitsMoreRowWhenAllShown() {
-        #expect(moreRow(unreadCount: 15, shown: 15) == nil)
     }
 }

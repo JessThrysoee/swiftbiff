@@ -27,8 +27,8 @@ struct MenuContent: View {
             ForEach(checker.threads) { thread in
                 Button(menuTitle(for: thread)) { checker.openThread(thread) }
             }
-            if let more = moreRow(unreadCount: unreadCount, shown: checker.threads.count) {
-                Text(more)
+            if unreadCount > checker.threads.count {
+                Text("…and \(unreadCount - checker.threads.count) more")
             }
         }
 
@@ -53,6 +53,13 @@ struct MenuContent: View {
             String(localized: "Check Now")
         }
     }
+}
+
+func menuTitle(for thread: UnreadThread, maxLength: Int = 60) -> String {
+    let subject = thread.subject.isEmpty ? String(localized: "(no subject)") : thread.subject
+    let title = "\(thread.sender) - \(subject)"
+    guard title.count > maxLength else { return title }
+    return title.prefix(maxLength - 1).trimmingCharacters(in: .whitespaces) + "…"
 }
 
 struct MenuBarLabel: View {
