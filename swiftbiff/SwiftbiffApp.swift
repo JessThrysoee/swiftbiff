@@ -2,14 +2,13 @@ import SwiftUI
 
 @main
 struct SwiftbiffApp: App {
+    @State private var checker = MailChecker()
+
     var body: some Scene {
         MenuBarExtra {
-            Button("Quit") {
-                NSApp.terminate(nil)
-            }
-            .keyboardShortcut("q")
+            MenuContent(checker: checker)
         } label: {
-            Image(systemName: "envelope")
+            MenuBarLabel(checker: checker)
         }
         .menuBarExtraStyle(.menu)
     }
