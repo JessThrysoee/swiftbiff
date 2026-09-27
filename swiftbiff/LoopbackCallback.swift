@@ -30,8 +30,7 @@ func receiveCallback(
                 try? await connection.send(Data(httpResponse(status: "404 Not Found", message: "").utf8), endOfStream: true)
                 return
             }
-            let result = Result { try parseCallback(requestLine, expectedState: state) }
-                .mapError { $0 as? OAuthError ?? .badCallback }
+            let result = Result { () throws(OAuthError) in try parseCallback(requestLine, expectedState: state) }
             let message = switch result {
             case .success: String(localized: "Signed in to SwiftBiff. You can close this tab.")
             case .failure: String(localized: "SwiftBiff sign-in failed. You can close this tab.")
@@ -44,12 +43,12 @@ func receiveCallback(
     }
     defer { server.cancel() }
 
-    guard let port = await ports.first(where: { _ in true }) else { throw OAuthError.listenerFailed }
+    guard let port = await ports.first() else { throw OAuthError.listenerFailed }
     let redirectURI = "http://127.0.0.1:\(port)"
     await onReady(redirectURI)
 
     let code = try await withThrowingTaskGroup(of: Result<String, OAuthError>?.self) { group in
-        group.addTask { await callbacks.first { _ in true } }
+        group.addTask { await callbacks.first() }
         group.addTask {
             try await Task.sleep(for: timeout)
             return .failure(.timedOut)
@@ -78,7 +77,7 @@ private func httpResponse(status: String, message: String) -> String {
         + "Content-Length: \(body.utf8.count)\r\nConnection: close\r\n\r\n\(body)"
 }
 
-func parseCallback(_ requestLine: String, expectedState: String) throws -> String {
+func parseCallback(_ requestLine: String, expectedState: String) throws(OAuthError) -> String {
     let parts = requestLine.split(separator: " ")
     guard parts.count == 3, parts[0] == "GET", let components = URLComponents(string: String(parts[1])) else {
         throw OAuthError.badCallback
@@ -90,4 +89,10 @@ func parseCallback(_ requestLine: String, expectedState: String) throws -> Strin
     if let error = value("error") { throw OAuthError.denied(error) }
     guard let code = value("code") else { throw OAuthError.badCallback }
     return code
+}
+
+private extension AsyncSequence {
+    func first() async rethrows -> Element? {
+        try await first { _ in true }
+    }
 }
