@@ -70,7 +70,7 @@ struct OAuthClient: Sendable {
         _ = try? await URLSession.shared.data(for: request)
     }
 
-    private func requestToken(_ parameters: [String: String]) async throws -> TokenResponse {
+    private func requestToken(_ parameters: [String: String]) async throws -> (accessToken: AccessToken, refreshToken: String?) {
         var request = URLRequest(url: URL(string: "https://oauth2.googleapis.com/token")!)
         request.httpMethod = "POST"
         request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
@@ -82,29 +82,18 @@ struct OAuthClient: Sendable {
             logger.error("Token request failed with status \(status)")
             throw tokenError(status: status, body: data)
         }
-        return try JSONDecoder().decode(TokenResponse.self, from: data)
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let token = try decoder.decode(TokenResponse.self, from: data)
+        let expiresAt = Date.now.addingTimeInterval(TimeInterval(token.expiresIn))
+        return (AccessToken(value: token.accessToken, expiresAt: expiresAt), token.refreshToken)
     }
 }
 
 private struct TokenResponse: Decodable {
-    let accessToken: AccessToken
+    let accessToken: String
+    let expiresIn: Int
     let refreshToken: String?
-
-    enum CodingKeys: String, CodingKey {
-        case accessToken = "access_token"
-        case expiresIn = "expires_in"
-        case refreshToken = "refresh_token"
-    }
-
-    init(from decoder: any Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let expiresIn = try container.decode(Int.self, forKey: .expiresIn)
-        accessToken = AccessToken(
-            value: try container.decode(String.self, forKey: .accessToken),
-            expiresAt: Date.now.addingTimeInterval(TimeInterval(expiresIn))
-        )
-        refreshToken = try container.decodeIfPresent(String.self, forKey: .refreshToken)
-    }
 }
 
 func tokenError(status: Int, body: Data) -> OAuthError {
