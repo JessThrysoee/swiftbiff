@@ -63,13 +63,19 @@ struct SettingsView: View {
                     Text("Waiting for the browser…")
                     Button("Cancel") { signInTask?.cancel() }
                 } else {
-                    Text(errorMessage ?? String(localized: "Not signed in"))
-                        .foregroundStyle(errorMessage == nil ? Color.secondary : Color.red)
+                    Text(signedOutMessage ?? String(localized: "Not signed in"))
+                        .foregroundStyle(signedOutMessage == nil ? Color.secondary : Color.red)
                     Button("Sign In…", action: signIn)
                         .disabled(clientID.isEmpty || clientSecret.isEmpty)
                 }
             }
         }
+    }
+
+    private var signedOutMessage: String? {
+        if let errorMessage { return errorMessage }
+        if checker.sessionExpired { return String(localized: "Google signed you out. Sign in again.") }
+        return nil
     }
 
     @ViewBuilder

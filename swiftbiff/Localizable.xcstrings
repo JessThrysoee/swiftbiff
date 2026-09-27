@@ -43,6 +43,9 @@
     "Google rejected the sign-in. Check the client ID and secret." : {
 
     },
+    "Google signed you out. Sign in again." : {
+
+    },
     "No unread mail" : {
 
     },

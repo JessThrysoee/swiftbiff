@@ -19,6 +19,7 @@ final class MailChecker {
     private(set) var unreadCount: Int?
     private(set) var threads: [UnreadThread] = []
     private(set) var lastCheck: Date?
+    private(set) var sessionExpired = false
     private(set) var email: String? {
         didSet { UserDefaults.standard.set(email, forKey: "email") }
     }
@@ -86,6 +87,7 @@ final class MailChecker {
                 logger.notice("Refresh token was rejected, signing out")
                 Keychain.delete(.refreshToken)
                 clearState()
+                sessionExpired = true
                 return
             }
             logger.error("Check failed: \(error)")
@@ -109,6 +111,7 @@ final class MailChecker {
         let tokens = try await client.authorize()
         try Keychain.set(tokens.refreshToken, for: .refreshToken)
         accessToken = tokens.accessToken
+        sessionExpired = false
         email = try? await GmailClient(accessToken: tokens.accessToken.value).emailAddress()
         status = .ok
         startPolling()
@@ -196,6 +199,7 @@ final class MailChecker {
         polling = nil
         accessToken = nil
         failedChecks = 0
+        sessionExpired = false
         status = .signedOut
         unreadCount = nil
         threads = []
