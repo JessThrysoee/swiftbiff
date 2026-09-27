@@ -1,4 +1,8 @@
+import ServiceManagement
 import SwiftUI
+import os
+
+private let logger = Logger(subsystem: "dk.thrysoee.swiftbiff", category: "settings")
 
 struct SettingsView: View {
     @Bindable var checker: MailChecker
@@ -7,6 +11,7 @@ struct SettingsView: View {
     @State private var clientSecret = ""
     @State private var signInTask: Task<Void, Never>?
     @State private var errorMessage: String?
+    @State private var opensAtLogin = false
 
     var body: some View {
         Form {
@@ -26,6 +31,8 @@ struct SettingsView: View {
             NSApp.activate()
             clientID = checker.savedClientID
             clientSecret = checker.savedClientSecret
+            // The user can also change this in System Settings, so read it every time.
+            opensAtLogin = SMAppService.mainApp.status == .enabled
         }
     }
 
@@ -72,6 +79,20 @@ struct SettingsView: View {
                 Text("\(minutes) min").tag(minutes)
             }
         }
+        Toggle("Open at login", isOn: Binding(get: { opensAtLogin }, set: setOpensAtLogin))
+    }
+
+    private func setOpensAtLogin(_ enabled: Bool) {
+        do {
+            if enabled {
+                try SMAppService.mainApp.register()
+            } else {
+                try SMAppService.mainApp.unregister()
+            }
+        } catch {
+            logger.error("Changing open at login failed: \(error)")
+        }
+        opensAtLogin = SMAppService.mainApp.status == .enabled
     }
 
     private func signIn() {
