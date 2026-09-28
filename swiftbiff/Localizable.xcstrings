@@ -12,28 +12,6 @@
         }
       }
     },
-    "%lld min" : {
-      "localizations" : {
-        "en" : {
-          "variations" : {
-            "plural" : {
-              "one" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld min"
-                }
-              },
-              "other" : {
-                "stringUnit" : {
-                  "state" : "translated",
-                  "value" : "%lld min"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "%lld unread" : {
       "comment" : "Menu bar accessibility label, N unread conversations",
       "localizations" : {

@@ -89,7 +89,8 @@ struct SettingsView: View {
     private var checkFields: some View {
         Picker(selection: $checker.interval) {
             ForEach(MailChecker.intervals, id: \.self) { minutes in
-                Text("\(minutes) min").tag(minutes)
+                Text(Duration.seconds(minutes * 60), format: .units(allowed: [.minutes], width: .abbreviated))
+                    .tag(minutes)
             }
         } label: {
             Text("Check every", comment: "Settings label in front of the interval picker")
