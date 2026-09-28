@@ -53,10 +53,10 @@ struct SettingsView: View {
                 .textFieldStyle(.roundedBorder)
                 .disabled(checker.status != .signedOut)
         }
-        LabeledContent("Account") {
+        LabeledContent {
             HStack {
                 if checker.status != .signedOut {
-                    Text(checker.email ?? String(localized: "Signed in"))
+                    Text(checker.email ?? String(localized: "Signed in", comment: "Account row while the email address is still loading"))
                         .textSelection(.enabled)
                     Button("Sign Out") { checker.signOut() }
                 } else if signInTask != nil {
@@ -69,6 +69,8 @@ struct SettingsView: View {
                         .disabled(!canSignIn)
                 }
             }
+        } label: {
+            Text("Account", comment: "Settings label in front of the signed-in email address")
         }
     }
 
@@ -85,10 +87,12 @@ struct SettingsView: View {
 
     @ViewBuilder
     private var checkFields: some View {
-        Picker("Check every", selection: $checker.interval) {
+        Picker(selection: $checker.interval) {
             ForEach(MailChecker.intervals, id: \.self) { minutes in
                 Text("\(minutes) min").tag(minutes)
             }
+        } label: {
+            Text("Check every", comment: "Settings label in front of the interval picker")
         }
         Toggle("Open at login", isOn: Binding(get: { opensAtLogin }, set: setOpensAtLogin))
     }

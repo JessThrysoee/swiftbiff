@@ -28,7 +28,7 @@ struct MenuContent: View {
                 Button(menuTitle(for: thread)) { checker.openThread(thread) }
             }
             if unreadCount > checker.threads.count {
-                Text("…and \(unreadCount - checker.threads.count) more")
+                Text("…and \(unreadCount - checker.threads.count) more", comment: "Menu row after the listed conversations, N not shown")
             }
         }
 
@@ -56,7 +56,9 @@ struct MenuContent: View {
 }
 
 func menuTitle(for thread: UnreadThread, maxLength: Int = 60) -> String {
-    let subject = thread.subject.isEmpty ? String(localized: "(no subject)") : thread.subject
+    let subject = thread.subject.isEmpty
+        ? String(localized: "(no subject)", comment: "Menu row subject when the mail has none")
+        : thread.subject
     let title = String(localized: "\(thread.sender) - \(subject)", comment: "A menu row: the sender, then the subject")
     guard title.count > maxLength else { return title }
     return title.prefix(maxLength - 1).trimmingCharacters(in: .whitespaces) + "…"
@@ -67,7 +69,9 @@ struct MenuBarLabel: View {
 
     var body: some View {
         Image(nsImage: image)
-            .accessibilityLabel(count.map { String(localized: "\($0) unread") } ?? "SwiftBiff")
+            .accessibilityLabel(count.map {
+                String(localized: "\($0) unread", comment: "Menu bar accessibility label, N unread conversations")
+            } ?? "SwiftBiff")
     }
 
     private var count: Int? {

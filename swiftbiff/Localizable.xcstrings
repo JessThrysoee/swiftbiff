@@ -35,6 +35,7 @@
       }
     },
     "%lld unread" : {
+      "comment" : "Menu bar accessibility label, N unread conversations",
       "localizations" : {
         "en" : {
           "variations" : {
@@ -57,13 +58,13 @@
       }
     },
     "(no subject)" : {
-
+      "comment" : "Menu row subject when the mail has none"
     },
     "Access was not granted." : {
 
     },
     "Account" : {
-
+      "comment" : "Settings label in front of the signed-in email address"
     },
     "Cancel" : {
 
@@ -78,7 +79,7 @@
 
     },
     "Check every" : {
-
+      "comment" : "Settings label in front of the interval picker"
     },
     "Client ID" : {
 
@@ -126,7 +127,7 @@
 
     },
     "Signed in" : {
-
+      "comment" : "Account row while the email address is still loading"
     },
     "Signed in to SwiftBiff. You can close this tab." : {
 
@@ -141,6 +142,7 @@
 
     },
     "…and %lld more" : {
+      "comment" : "Menu row after the listed conversations, N not shown",
       "localizations" : {
         "en" : {
           "variations" : {
