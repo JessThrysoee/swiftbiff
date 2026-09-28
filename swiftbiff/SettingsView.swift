@@ -66,10 +66,15 @@ struct SettingsView: View {
                     Text(signedOutMessage ?? String(localized: "Not signed in"))
                         .foregroundStyle(signedOutMessage == nil ? Color.secondary : Color.red)
                     Button("Sign In…", action: signIn)
-                        .disabled(clientID.isEmpty || clientSecret.isEmpty)
+                        .disabled(!canSignIn)
                 }
             }
         }
+    }
+
+    private var canSignIn: Bool {
+        let fields = [clientID, clientSecret].map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+        return fields.allSatisfy { !$0.isEmpty }
     }
 
     private var signedOutMessage: String? {
