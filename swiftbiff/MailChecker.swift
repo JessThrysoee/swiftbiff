@@ -36,6 +36,7 @@ final class MailChecker {
 
     private var accessToken: AccessToken?
     private var polling: Task<Void, Never>?
+    private var recheck: Task<Void, Never>?
     private var isChecking = false
     private var isUserInitiated = false
     private var failedChecks = 0
@@ -141,6 +142,13 @@ final class MailChecker {
         if let url = components.url {
             NSWorkspace.shared.open(url)
         }
+        // The user is probably reading the mail now, so do not show it as unread for a whole interval.
+        recheck?.cancel()
+        recheck = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(15))
+            guard !Task.isCancelled else { return }
+            await self?.check()
+        }
     }
 
     private func startPolling(after delay: Duration = .zero) {
@@ -196,6 +204,8 @@ final class MailChecker {
     private func clearState() {
         polling?.cancel()
         polling = nil
+        recheck?.cancel()
+        recheck = nil
         accessToken = nil
         failedChecks = 0
         sessionExpired = false
