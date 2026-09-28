@@ -37,7 +37,7 @@ struct MenuContent: View {
             Text("Settings…")
         }
         .keyboardShortcut(",")
-        Button("Quit") {
+        Button("Quit SwiftBiff") {
             NSApp.terminate(nil)
         }
         .keyboardShortcut("q")
