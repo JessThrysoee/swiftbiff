@@ -67,6 +67,9 @@
     "Account" : {
       "comment" : "Settings label in front of the signed-in email address"
     },
+    "Approve SwiftBiff under Login Items in System Settings." : {
+
+    },
     "Cancel" : {
 
     },
@@ -107,6 +110,9 @@
 
     },
     "Open Inbox" : {
+
+    },
+    "Open System Settings" : {
 
     },
     "Open at login" : {

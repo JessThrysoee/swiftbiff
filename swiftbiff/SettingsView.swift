@@ -11,7 +11,7 @@ struct SettingsView: View {
     @State private var clientSecret = ""
     @State private var signInTask: Task<Void, Never>?
     @State private var errorMessage: String?
-    @State private var opensAtLogin = false
+    @State private var loginItemStatus = SMAppService.Status.notRegistered
 
     var body: some View {
         Form {
@@ -32,7 +32,7 @@ struct SettingsView: View {
             clientID = checker.savedClientID
             clientSecret = checker.savedClientSecret
             // The user can also change this in System Settings, so read it every time.
-            opensAtLogin = SMAppService.mainApp.status == .enabled
+            loginItemStatus = SMAppService.mainApp.status
         }
     }
 
@@ -99,7 +99,15 @@ struct SettingsView: View {
         } label: {
             Text("Check every", comment: "Settings label in front of the interval picker")
         }
-        Toggle("Open at login", isOn: Binding(get: { opensAtLogin }, set: setOpensAtLogin))
+        Toggle("Open at login", isOn: Binding(get: { loginItemStatus == .enabled }, set: setOpensAtLogin))
+        if loginItemStatus == .requiresApproval {
+            HStack {
+                Text("Approve SwiftBiff under Login Items in System Settings.")
+                    .foregroundStyle(.secondary)
+                Spacer()
+                Button("Open System Settings") { SMAppService.openSystemSettingsLoginItems() }
+            }
+        }
     }
 
     private func setOpensAtLogin(_ enabled: Bool) {
@@ -112,7 +120,7 @@ struct SettingsView: View {
         } catch {
             logger.error("Changing open at login failed: \(error)")
         }
-        opensAtLogin = SMAppService.mainApp.status == .enabled
+        loginItemStatus = SMAppService.mainApp.status
     }
 
     private func signIn() {
