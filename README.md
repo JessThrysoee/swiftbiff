@@ -2,20 +2,7 @@
 
 SwiftBiff is a macOS menu bar app for Gmail. It shows how many unread conversations are in your inbox, lists the sender and subject of the newest ones, and opens the inbox or a clicked conversation in your default browser.
 
-```
-✉ 3
-┌──────────────────────────────────────────┐
-│ Open Inbox                               │
-│ Check Now - last check 17:42             │
-├──────────────────────────────────────────┤
-│ Jane Doe - Re: Q3 budget review          │
-│ GitHub - [swiftbiff] New issue #12       │
-│ Anna Berg - Dinner on Friday?            │
-├──────────────────────────────────────────┤
-│ Settings…                             ⌘, │
-│ Quit                                  ⌘Q │
-└──────────────────────────────────────────┘
-```
+<img src="assets/swiftbiff-dropdown.png" width="498" alt="The SwiftBiff menu with an unread count of 17 and a list of senders and subjects">
 
 SwiftBiff asks Google for the `gmail.metadata` scope and nothing else. That scope covers labels, counts and message headers. It does not cover message bodies or attachments, so SwiftBiff cannot read your mail even if it wanted to. It cannot send, delete or change anything either.
 
@@ -35,6 +22,8 @@ SwiftBiff has no shared Google client. You create your own, once. It takes about
 4. Under Data Access, add the scope `https://www.googleapis.com/auth/gmail.metadata`.
 5. Under Clients, create an OAuth client with application type "Desktop app". Copy the client ID and client secret.
 6. Open SwiftBiff's Settings, paste the client ID and secret, and click Sign In. Your browser opens Google's consent screen. After you approve, the tab says you can close it.
+
+   <img src="assets/swiftbiff-settings.png" width="491" alt="The SwiftBiff settings window, signed in">
 
 A Workspace admin can block restricted Gmail scopes like `gmail.metadata` for apps they have not configured. If sign-in fails with an admin policy error, ask your admin to allow your client ID.
 
