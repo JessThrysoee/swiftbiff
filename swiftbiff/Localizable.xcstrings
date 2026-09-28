@@ -50,12 +50,6 @@
     "Check Now" : {
 
     },
-    "Check Now - last check %@" : {
-
-    },
-    "Check Now - last check: error" : {
-
-    },
     "Check every" : {
       "comment" : "Settings label in front of the interval picker"
     },
@@ -72,6 +66,15 @@
 
     },
     "Google signed you out. Sign in again." : {
+
+    },
+    "Last check failed" : {
+
+    },
+    "Last check failed. Showing mail from %@" : {
+
+    },
+    "Last checked %@" : {
 
     },
     "No unread mail" : {

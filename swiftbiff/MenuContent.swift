@@ -9,10 +9,13 @@ struct MenuContent: View {
         }
         .disabled(checker.status == .signedOut)
 
-        Button(checkNowTitle) {
+        Button("Check Now") {
             Task { await checker.check(userInitiated: true) }
         }
         .disabled(checker.status == .signedOut)
+        if let lastCheckRow {
+            Text(lastCheckRow)
+        }
 
         if checker.status == .signedOut {
             Divider()
@@ -43,14 +46,17 @@ struct MenuContent: View {
         .keyboardShortcut("q")
     }
 
-    private var checkNowTitle: String {
-        switch (checker.status, checker.lastCheck) {
-        case (.failed, _):
-            String(localized: "Check Now - last check: error")
-        case (.ok, let lastCheck?):
-            String(localized: "Check Now - last check \(lastCheck.formatted(date: .omitted, time: .shortened))")
+    private var lastCheckRow: String? {
+        let time = checker.lastCheck?.formatted(date: .omitted, time: .shortened)
+        return switch (checker.status, time) {
+        case (.ok, let time?):
+            String(localized: "Last checked \(time)")
+        case (.failed, let time?):
+            String(localized: "Last check failed. Showing mail from \(time)")
+        case (.failed, nil):
+            String(localized: "Last check failed")
         default:
-            String(localized: "Check Now")
+            nil
         }
     }
 }
