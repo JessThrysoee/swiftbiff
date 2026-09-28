@@ -55,24 +55,22 @@ struct SettingsView: View {
             Link("How to create a Google client", destination: URL(string: "https://github.com/JessThrysoee/swiftbiff#google-cloud-setup")!)
                 .font(.callout)
         }
-        LabeledContent {
-            HStack {
-                if checker.status != .signedOut {
-                    Text(checker.email ?? String(localized: "Signed in", comment: "Account row while the email address is still loading"))
-                        .textSelection(.enabled)
-                    Button("Sign Out") { checker.signOut() }
-                } else if signInTask != nil {
-                    Text("Waiting for the browser…")
-                    Button("Cancel") { signInTask?.cancel() }
-                } else {
-                    Text("Not signed in")
-                        .foregroundStyle(.secondary)
-                    Button("Sign In…", action: signIn)
-                        .disabled(!canSignIn)
-                }
-            }
-        } label: {
+        HStack {
             Text("Account", comment: "Settings label in front of the signed-in email address")
+            Spacer()
+            if checker.status != .signedOut {
+                Text(checker.email ?? String(localized: "Signed in", comment: "Account row while the email address is still loading"))
+                    .textSelection(.enabled)
+                Button("Sign Out") { checker.signOut() }
+            } else if signInTask != nil {
+                Text("Waiting for the browser…")
+                Button("Cancel") { signInTask?.cancel() }
+            } else {
+                Text("Not signed in")
+                    .foregroundStyle(.secondary)
+                Button("Sign In…", action: signIn)
+                    .disabled(!canSignIn)
+            }
         }
         if let signedOutMessage {
             Text(signedOutMessage)
