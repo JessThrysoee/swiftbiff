@@ -75,9 +75,7 @@ struct MenuBarLabel: View {
 
     var body: some View {
         Image(nsImage: image)
-            .accessibilityLabel(count.map {
-                String(localized: "\($0) unread", comment: "Menu bar accessibility label, N unread conversations")
-            } ?? "SwiftBiff")
+            .accessibilityLabel(accessibilityLabel)
     }
 
     private var count: Int? {
@@ -85,17 +83,47 @@ struct MenuBarLabel: View {
         return unreadCount
     }
 
+    private var symbol: String {
+        if checker.status == .signedOut { return "envelope.badge.person.crop" }
+        return count == nil ? "envelope" : "envelope.fill"
+    }
+
+    // Dimmed means the data is stale or missing. Signed out has no data to be stale.
+    private var isDimmed: Bool {
+        checker.status == .failed || (checker.status == .ok && checker.unreadCount == nil)
+    }
+
+    private var accessibilityLabel: String {
+        switch (checker.status, checker.unreadCount) {
+        case (.signedOut, _):
+            String(localized: "SwiftBiff, signed out")
+        case (.ok, nil):
+            String(localized: "SwiftBiff, checking")
+        case (.ok, 0):
+            String(localized: "No unread mail")
+        case (.ok, let count?):
+            String(localized: "\(count) unread", comment: "Menu bar accessibility label, N unread conversations")
+        case (.failed, nil):
+            String(localized: "SwiftBiff, last check failed")
+        case (.failed, let count?):
+            String(
+                localized: "\(count) unread, last check failed",
+                comment: "Menu bar accessibility label, N unread conversations and the last check failed"
+            )
+        }
+    }
+
     // MenuBarExtra ignores opacity, so the label is drawn into a template image, which keeps its alpha.
     private var image: NSImage {
         let content = HStack(spacing: 3) {
-            Image(systemName: count == nil ? "envelope" : "envelope.fill")
+            Image(systemName: symbol)
                 .font(.system(size: 15, weight: .medium))
             if let count {
                 Text(count, format: .number)
                     .font(.system(size: 13))
             }
         }
-        .opacity(checker.status == .ok && checker.unreadCount != nil ? 1 : 0.4)
+        .opacity(isDimmed ? 0.4 : 1)
 
         let renderer = ImageRenderer(content: content)
         renderer.scale = NSScreen.main?.backingScaleFactor ?? 2

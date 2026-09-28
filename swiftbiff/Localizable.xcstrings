@@ -35,6 +35,29 @@
         }
       }
     },
+    "%lld unread, last check failed" : {
+      "comment" : "Menu bar accessibility label, N unread conversations and the last check failed",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld unread, last check failed"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld unread, last check failed"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "(no subject)" : {
       "comment" : "Menu row subject when the mail has none"
     },
@@ -114,6 +137,15 @@
 
     },
     "SwiftBiff sign-in failed. You can close this tab." : {
+
+    },
+    "SwiftBiff, checking" : {
+
+    },
+    "SwiftBiff, last check failed" : {
+
+    },
+    "SwiftBiff, signed out" : {
 
     },
     "Timed out waiting for the browser." : {
