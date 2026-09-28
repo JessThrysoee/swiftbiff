@@ -63,14 +63,18 @@ struct SettingsView: View {
                     Text("Waiting for the browser…")
                     Button("Cancel") { signInTask?.cancel() }
                 } else {
-                    Text(signedOutMessage ?? String(localized: "Not signed in"))
-                        .foregroundStyle(signedOutMessage == nil ? Color.secondary : Color.red)
+                    Text("Not signed in")
+                        .foregroundStyle(.secondary)
                     Button("Sign In…", action: signIn)
                         .disabled(!canSignIn)
                 }
             }
         } label: {
             Text("Account", comment: "Settings label in front of the signed-in email address")
+        }
+        if let signedOutMessage {
+            Text(signedOutMessage)
+                .foregroundStyle(.red)
         }
     }
 
