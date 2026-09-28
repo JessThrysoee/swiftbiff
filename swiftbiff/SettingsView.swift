@@ -53,6 +53,10 @@ struct SettingsView: View {
                 .textFieldStyle(.roundedBorder)
                 .disabled(checker.status != .signedOut)
         }
+        if checker.status == .signedOut {
+            Link("How to create a Google client", destination: URL(string: "https://github.com/JessThrysoee/swiftbiff#google-cloud-setup")!)
+                .font(.callout)
+        }
         LabeledContent {
             HStack {
                 if checker.status != .signedOut {
