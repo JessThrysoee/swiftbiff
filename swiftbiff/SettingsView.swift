@@ -27,8 +27,6 @@ struct SettingsView: View {
         .frame(width: 480)
         .fixedSize(horizontal: false, vertical: true)
         .onAppear {
-            // Menu bar apps open Settings behind the frontmost app.
-            NSApp.activate()
             clientID = checker.savedClientID
             clientSecret = checker.savedClientSecret
             // The user can also change this in System Settings, so read it every time.

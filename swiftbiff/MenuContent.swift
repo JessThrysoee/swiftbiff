@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MenuContent: View {
     let checker: MailChecker
+    @Environment(\.openSettings) private var openSettings
 
     var body: some View {
         Button("Open Inbox") {
@@ -19,9 +20,7 @@ struct MenuContent: View {
 
         if checker.status == .signedOut {
             Divider()
-            SettingsLink {
-                Text("Sign In…")
-            }
+            Button("Sign In…", action: showSettings)
         } else if let unreadCount = checker.unreadCount {
             Divider()
             if checker.threads.isEmpty {
@@ -36,14 +35,21 @@ struct MenuContent: View {
         }
 
         Divider()
-        SettingsLink {
-            Text("Settings…")
-        }
-        .keyboardShortcut(",")
+        Button("Settings…", action: showSettings)
+            .keyboardShortcut(",")
         Button("Quit SwiftBiff") {
             NSApp.terminate(nil)
         }
         .keyboardShortcut("q")
+    }
+
+    // Picking a menu bar item does not activate the app, so the window would open behind the frontmost app.
+    private func showSettings() {
+        openSettings()
+        NSApp.activate()
+        Task { @MainActor in
+            NSApp.windows.first { $0.styleMask.contains(.titled) }?.orderFrontRegardless()
+        }
     }
 
     private var lastCheckRow: String? {
